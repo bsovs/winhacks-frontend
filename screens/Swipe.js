@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import SwipeCards from "react-native-swipe-cards-deck";
 import Loading from "../components/Loading";
-import Layout from "../styles/Layout";
-import Colors from "../styles/Colors";
 import Card from "../components/Card";
 
 function StatusCard({ text }) {
@@ -24,12 +22,12 @@ export default function Swipe() {
             setTimeout(() => {
                 setCards([
                     {
-                        text: "Drake",
-                        description: "The kids crib. The one and only!",
+                        text: "Drake's House. 21 Park Ln Cir",
+                        description: "Rapper, singer, songwriter, record producer, and actor, Drake, is building this 21,000 sqft Versailles-inspired estate in Toronto's exclusive Bridle Path neighborhood. The property will include a basketball court, gym, outdoor projection screen, both champagne and wine cellars, screening room, spa and massage areas, and a basement 'jersey museum' for his sports collectables.",
                         images: ["https://firebasestorage.googleapis.com/v0/b/winhacks-308216.appspot.com/o/assets%2Fdrake_1.jpg?alt=media"],
-                        lat: 40.44,
-                        lon: 23.55,
-                        size: 11000,
+                        lat: 43.7341853,
+                        lon: -79.3748936,
+                        size: 21000,
                     },
                     {
                         text: "N/A",

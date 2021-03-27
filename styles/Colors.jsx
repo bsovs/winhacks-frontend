@@ -3,7 +3,7 @@ const Colors = {
     black: '#000',
     primaryBg: 'rgba(245,48,70,0.78)',
     secondaryBg: '#bd2000',
-    primaryText: '#ff9b7c',
+    primaryText: '#fc273d',
     secondaryText: '#fa1e0e',
     primaryStart: '#f18a69',
     primaryEnd: '#d13e60',

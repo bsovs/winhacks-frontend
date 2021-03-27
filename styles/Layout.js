@@ -1,4 +1,5 @@
 import { Dimensions, Platform, StyleSheet } from "react-native";
+import Colors from "./Colors";
 const { height, width } = Dimensions.get('window');
 
 const Layout = StyleSheet.create({
@@ -33,6 +34,13 @@ const Layout = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         width: width / 1.5
+    },
+    title: {
+        fontWeight: 'bold',
+        fontSize: 30,
+        marginVertical: 10,
+        letterSpacing: 2,
+        color: Colors.primaryText
     },
     textHeader: {
         fontWeight: '500',
