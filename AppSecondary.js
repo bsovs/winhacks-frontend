@@ -1,13 +1,13 @@
 import React from 'react';
-import Swipe from "./screens/Swipe";
-import Body from "./components/Body";
+import { StyleSheet, Text, View } from 'react-native';
+import ConfiguredApp from './ConfigureApp';
 
 const AppSecondary = () => {
     return (
-        <Body>
-            <Swipe />
-        </Body>
+        <ConfiguredApp />
+
     )
 }
+
 
 export default AppSecondary
