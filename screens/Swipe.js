@@ -5,6 +5,7 @@ import SwipeCards from "react-native-swipe-cards-deck";
 import Loading from "../components/Loading";
 import Card from "../components/Card";
 import { onSwipe } from "../store/actions/swipeActions";
+import ProfileNavButton from '../components/navbar-buttons/ProfileNavButton'
 
 function StatusCard({ text }) {
     return (

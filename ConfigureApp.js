@@ -3,14 +3,15 @@ import React from "react";
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Swipe from './screens/Swipe'
-import ProfileScreen from './screens/Profile'
+import Message from './screens/Message'
+import Profile from './screens/Profile'
 import { StyleSheet, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Button } from 'react-native';
 import Colors from "./styles/Colors";
 import Layout from "./styles/Layout";
 import ProfileNavButton from './components/navbar-buttons/ProfileNavButton'
+import MessagesNavButton from './components/navbar-buttons/MessagesNavButton'
 
 const Stack = createStackNavigator();
 
@@ -49,9 +50,10 @@ function ConfiguredApp() {
         <NavigationContainer>
             <Stack.Navigator>
                 <Stack.Screen name="Home" component={Swipe}
-                    options={({ navigation }) => ({
-                        headerTitle: 'Logo Here',
-                        headerLeft: null,
+                    options={(navigationData) => ({
+                        headerTitle: 'Logo here',
+                        headerLeft: () => <ProfileNavButton navigationData={navigationData} />,
+                        headerRight: () => <MessagesNavButton navigationData={navigationData} />,
                     })}
                 />
                 <Stack.Screen name="Refresh" component={Swipe}
@@ -60,6 +62,14 @@ function ConfiguredApp() {
                         headerLeft: null,
                         headerRight: () => <ProfileNavButton navigationData={navigation} />,
                     })}
+                />
+                <Stack.Screen
+                    name="Messages"
+                    component={Message}
+                />
+                <Stack.Screen
+                    name="Profile"
+                    component={Profile}
                 />
             </Stack.Navigator>
         </NavigationContainer>

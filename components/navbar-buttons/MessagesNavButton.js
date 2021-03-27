@@ -1,7 +1,6 @@
 import React from 'react'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 import { HeaderButton } from 'react-navigation-header-buttons'
-import { FontAwesome } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 
 const CustomHeaderButton = props => {
@@ -15,22 +14,22 @@ const CustomHeaderButton = props => {
     )
 }
 
-const ProfileNavButton = ({ navigationData }) => {
+const MessagesNavButton = ({ navigationData }) => {
 
     const handleButtonPress = () => {
-        console.log('Navigating to Profile');
-        navigationData.navigation.push('Profile');
+        console.log('Navigating to messages');
+        navigationData.navigation.push('Messages');
     }
 
     return (
         <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
             <Item
-                title='Add Friend Button'
-                iconName='person-circle-sharp'
+                title='Message Screen'
+                iconName='md-chatbubble-ellipses-outline'
                 onPress={handleButtonPress}
             />
         </HeaderButtons>
     )
 }
 
-export default ProfileNavButton
+export default MessagesNavButton
