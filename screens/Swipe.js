@@ -62,10 +62,9 @@ export default function Swipe() {
                     handleNope={handleNope}
                     handleMaybe={handleMaybe}
                     hasMaybeAction={true}
-
-                    // If you want a stack of cards instead of one-per-one view, activate stack mode
-                    // stack={true}
-                    // stackDepth={3}
+                    smoothTransition={true}
+                    stack={true}
+                    stackDepth={3}
                 />
             ) : (
                 <StatusCard text="Loading..." />

@@ -1,10 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import HomeSwipingScreen from './screens/HomeSwipingScreen';
+import Swipe from "./screens/Swipe";
+import Body from "./components/Body";
 
 const AppSecondary = () => {
     return (
-        <HomeSwipingScreen />
+        <Body>
+            <Swipe />
+        </Body>
     )
 }
 
