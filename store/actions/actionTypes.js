@@ -2,4 +2,12 @@ export const ON_SWIPE = "ON_SWIPE";
 export const SWIPE_SUCCESS = "SWIPE_SUCCESS"
 export const SWIPE_FAILURE = "SWIPE_FAILURE"
 
+export const CARDS_LOADING = "ON_SWIPE";
+export const CARDS_SUCCESS = "SWIPE_SUCCESS"
+export const CARDS_FAILURE = "SWIPE_FAILURE"
+
+export const LOCATION_LOADING = "ON_SWIPE";
+export const LOCATION_SUCCESS = "SWIPE_SUCCESS"
+export const LOCATION_FAILURE = "SWIPE_FAILURE"
+
 export const SET_PROFILE = "SET_PROFILE"

@@ -65,7 +65,7 @@ export default function Card({ data }) {
             {showMore ? (
                 <SafeAreaView style={{ height: Layout.height / 2 - headerHeight }}>
                     <ScrollView>
-                        <Text style={Layout.textHeader}>{data.text}</Text>
+                        <Text style={Layout.textHeader}>{data.title}</Text>
                         <Text style={[Layout.textRow, { fontWeight: 'bold' }]}>About</Text>
                         <Text style={[Layout.textRow]}>{data.description || 'n/a'}</Text>
                         <Text style={[Layout.textRow, { fontWeight: 'bold' }]}>Features</Text>

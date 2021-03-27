@@ -8,14 +8,14 @@ const auth = firebase.auth()
 
 const LandingScreen = () => {
 
+    const navigation = useNavigation()
+
     useEffect(() => {
-        console.log('checking if logged in')
+        console.log('[Landing] checking if logged in')
         if (auth.currentUser && auth.currentUser.email) {
             navigation.navigate('Swipe')
         }
     }, [])
-
-    const navigation = useNavigation()
 
     const handleLoginPressed = () => {
         // navigate

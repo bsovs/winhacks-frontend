@@ -1,6 +1,5 @@
 import 'react-native-gesture-handler';
-import React from "react";
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import React, {useEffect} from "react";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Swipe from './screens/Swipe'
 import Message from './screens/Message'
@@ -8,11 +7,10 @@ import Profile from './screens/Profile'
 import Login from './screens/Login'
 import Signup from './screens/Signup'
 import Landing from './screens/Landing'
-import { View } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import { createStackNavigator } from '@react-navigation/stack';
-import Colors from "./styles/Colors";
-import Layout from "./styles/Layout";
+import {getLocation} from "./store/actions/locationActions";
+import {connect} from "react-redux";
+import Loading from "./components/Loading";
 import ProfileNavButton from './components/navbar-buttons/ProfileNavButton'
 import MessagesNavButton from './components/navbar-buttons/MessagesNavButton'
 
@@ -21,8 +19,8 @@ const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 
+const ConfiguredApp = (props) => {
 
-const ConfiguredApp = () => {
     return (
         <Stack.Navigator>
             <Stack.Screen
@@ -67,32 +65,4 @@ const ConfiguredApp = () => {
     );
 }
 
-export default ConfiguredApp
-
-const NavButtons = ({ navigation }) => {
-    return (<View style={[Layout.row, { width: Layout.width }]}>
-        <View />
-        <Icon
-            onPress={() => navigation.navigate('Home')}
-            name="home"
-            size={30}
-            color={Colors.black}
-            style={{ margin: 'auto' }}
-        />
-        <Icon
-            onPress={() => navigation.navigate('Refresh')}
-            name="user"
-            size={28}
-            color={Colors.black}
-            style={{ margin: 'auto' }}
-        />
-        <Icon
-            onPress={() => navigation.navigate('Refresh')}
-            name="gear"
-            size={28}
-            color={Colors.black}
-            style={{ margin: 'auto' }}
-        />
-        <View />
-    </View>);
-}
+export default ConfiguredApp;
