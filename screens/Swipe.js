@@ -1,10 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 import SwipeCards from "react-native-swipe-cards-deck";
+import Loading from "../components/Loading";
+import Layout from "../styles/Layout";
+import {uid} from 'react-uid';
 
 function Card({ data }) {
     return (
         <View style={[styles.card, { backgroundColor: data.backgroundColor }]}>
+            {
+                data.images && data.images.map(url =>
+                    <Image
+                        key={uid(url)}
+                        source={{uri: url}}
+                        style={{width: Layout.width, height: Layout.height/2}}
+                    />)
+            }
             <Text>{data.text}</Text>
         </View>
     );
@@ -20,15 +31,14 @@ function StatusCard({ text }) {
 
 export default function Swipe() {
     // TODO: Change this to our view
-
     const [cards, setCards] = useState();
 
     // replace with real remote data fetching
     useEffect(() => {
         setTimeout(() => {
             setCards([
-                { text: "Tomato", backgroundColor: "red" },
-                { text: "Aubergine", backgroundColor: "purple" },
+                { text: "Tomato", backgroundColor: "red", images:["https://firebasestorage.googleapis.com/v0/b/winhacks-308216.appspot.com/o/assets%2Fdrake_1.jpg?alt=media"] },
+                { text: "Aubergine", backgroundColor: "purple", images:["https://firebasestorage.googleapis.com/v0/b/winhacks-308216.appspot.com/o/assets%2Fsample.jpg?alt=media"] },
                 { text: "Courgette", backgroundColor: "green" },
                 { text: "Blueberry", backgroundColor: "blue" },
                 { text: "Umm...", backgroundColor: "cyan" },
@@ -37,16 +47,15 @@ export default function Swipe() {
         }, 3000);
     }, []);
 
-    function handleYup(card) {
-        console.log(`Yup for ${card.text}`);
-        return true; // return false if you wish to cancel the action
-    }
-    function handleNope(card) {
-        console.log(`Nope for ${card.text}`);
+    if (!cards) return <Loading />
+
+    const handleYup = (card) => {
         return true;
     }
-    function handleMaybe(card) {
-        console.log(`Maybe for ${card.text}`);
+    const handleNope = (card) => {
+        return true;
+    }
+    const handleMaybe = (card) => {
         return true;
     }
 
@@ -81,10 +90,10 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     card: {
-        justifyContent: "center",
+        justifyContent: "flex-start",
         alignItems: "center",
-        width: 300,
-        height: 300,
+        width: Layout.width,
+        height: Layout.height,
     },
     cardsText: {
         fontSize: 22,
