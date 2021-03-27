@@ -4,6 +4,7 @@ import { Button, KeyboardAvoidingView, StyleSheet, Text, TextInput, View } from 
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import firebase from '../firebase.config'
 import Layout from "../styles/Layout";
+import axios from "../store/axios/axios-config";
 
 const auth = firebase.auth()
 
@@ -28,8 +29,14 @@ const SignupScreen = () => {
                 const authRes = await auth.createUserWithEmailAndPassword(email, password)
 
                 if (authRes.user.email) {
-                    console.log('succesful sign in')
-                    navigation.navigate('Swipe')
+                    axios.post('/profiles/new')
+                        .then(response => {
+                            console.log('successful sign in')
+                            navigation.navigate('Swipe')
+                        })
+                        .catch(error => {
+                            console.log(error)
+                        });
                 }
                 else {
                     console.log('no email')
