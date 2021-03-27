@@ -50,7 +50,7 @@ const Layout = StyleSheet.create({
     },
     textRow: {
         flexDirection: 'row',
-        width: width*3/4,
+        width: width * 3 / 4,
         marginVertical: 5
     },
     circle: {
@@ -65,5 +65,13 @@ const Layout = StyleSheet.create({
     },
     width: width,
     height: height,
+    textInput: {
+        borderWidth: 1,
+        marginVertical: 5,
+        padding: 5,
+        borderRadius: 5,
+        width: width - 75,
+        borderColor: Colors.grey
+    }
 });
 export default Layout;

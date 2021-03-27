@@ -1,14 +1,23 @@
+import { useNavigation } from "@react-navigation/core";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { Dimensions } from 'react-native';
+import { Button, StyleSheet, Text, View } from "react-native";
+import firebase from '../firebase.config'
+
+const auth = firebase.auth()
 
 const ProfileScreen = () => {
+
+    const navigation = useNavigation()
+
+    const handleLogOut = async () => {
+        await auth.signOut()
+        navigation.navigate('Landing')
+    }
+
     return (
         <View >
             <Text>Profile Screen</Text>
-            <View
-                style={{ height: 300, width: 300, backgroundColor: 'pink' }}
-            ></View>
+            <Button title='Log Out' onPress={handleLogOut} />
         </View>
     );
 }
