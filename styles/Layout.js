@@ -1,5 +1,4 @@
 import { Dimensions, Platform, StyleSheet } from "react-native";
-
 const { height, width } = Dimensions.get('window');
 
 const Layout = StyleSheet.create({
@@ -28,10 +27,15 @@ const Layout = StyleSheet.create({
         alignItems: 'center',
         width: width / 1.5
     },
-    text: {
+    textHeader: {
         fontWeight: '500',
         fontSize: 16,
-        marginVertical: 15
+        marginVertical: 10
+    },
+    textRow: {
+        flexDirection: 'row',
+        width: width*3/4,
+        marginVertical: 5
     },
     circle: {
         width: 30,
@@ -43,7 +47,7 @@ const Layout = StyleSheet.create({
     button: {
         marginRight: 10
     },
-    width: width,
+    width: width - 20,
     height: height,
 });
 export default Layout;

@@ -6,10 +6,12 @@ import Layout from "../styles/Layout";
 import {uid} from 'react-uid';
 import Colors from "../styles/Colors";
 import Bullet from "../components/Bullet";
+import {useHeaderHeight} from "@react-navigation/stack";
 
 function Card({ data }) {
+    const headerHeight = useHeaderHeight();
     return (
-        <View style={[styles.card]}>
+        <View style={[styles.card, {height: Layout.height - headerHeight}]}>
             {
                 data.images && data.images.map(url =>
                     <Image
@@ -22,9 +24,10 @@ function Card({ data }) {
                         }}
                     />)
             }
-            <Text>{data.text}</Text>
-            <Text style={{flexDirection: 'row', width: Layout.width*3/4}}>{data.description}</Text>
-            <Text style={{flexDirection: 'row', width: Layout.width*3/4}}>Features</Text>
+            <Text style={Layout.textHeader}>{data.text}</Text>
+            <Text style={[Layout.textRow, {fontWeight: 'bold'}]}>About</Text>
+            <Text style={[Layout.textRow]}>{data.description || 'n/a'}</Text>
+            <Text style={[Layout.textRow, {fontWeight: 'bold'}]}>Features</Text>
             <Bullet>lat-lon: ({data.lat}, {data.lon})</Bullet>
             <Bullet>size: {data.size} sqr. m</Bullet>
         </View>
@@ -40,7 +43,6 @@ function StatusCard({ text }) {
 }
 
 export default function Swipe() {
-    // TODO: Change this to our view
     const [cards, setCards] = useState();
 
     // replace with real remote data fetching
@@ -85,7 +87,7 @@ export default function Swipe() {
     }
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container]}>
             {cards ? (
                 <SwipeCards
                     cards={cards}

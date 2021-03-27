@@ -1,9 +1,9 @@
 const Colors = {
     white: '#fff',
     black: '#000',
-    primaryBg: '#8c0000',
+    primaryBg: 'rgba(234,41,114,0.38)',
     secondaryBg: '#bd2000',
-    primaryText: '#ffbe0f',
+    primaryText: '#ff9b7c',
     secondaryText: '#fa1e0e',
     primaryStart: '#f18a69',
     primaryEnd: '#d13e60',
