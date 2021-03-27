@@ -74,6 +74,8 @@ export default function Swipe() {
         }
     }, [cards]);
 
+    if (!cards) return <Loading />
+
     const handleYup = (card) => {
         return true;
     }
