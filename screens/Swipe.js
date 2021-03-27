@@ -4,19 +4,32 @@ import SwipeCards from "react-native-swipe-cards-deck";
 import Loading from "../components/Loading";
 import Layout from "../styles/Layout";
 import {uid} from 'react-uid';
+import Colors from "../styles/Colors";
+import Bullet from "../components/Bullet";
+import {useHeaderHeight} from "@react-navigation/stack";
 
 function Card({ data }) {
+    const headerHeight = useHeaderHeight();
     return (
-        <View style={[styles.card, { backgroundColor: data.backgroundColor }]}>
+        <View style={[styles.card, {height: Layout.height - headerHeight}]}>
             {
                 data.images && data.images.map(url =>
                     <Image
                         key={uid(url)}
                         source={{uri: url}}
-                        style={{width: Layout.width, height: Layout.height/2}}
+                        style={{
+                            width: Layout.width,
+                            height: Layout.height/2,
+                            borderRadius: styles.card.borderRadius,
+                        }}
                     />)
             }
-            <Text>{data.text}</Text>
+            <Text style={Layout.textHeader}>{data.text}</Text>
+            <Text style={[Layout.textRow, {fontWeight: 'bold'}]}>About</Text>
+            <Text style={[Layout.textRow]}>{data.description || 'n/a'}</Text>
+            <Text style={[Layout.textRow, {fontWeight: 'bold'}]}>Features</Text>
+            <Bullet>lat-lon: ({data.lat}, {data.lon})</Bullet>
+            <Bullet>size: {data.size} sqr. m</Bullet>
         </View>
     );
 }
@@ -30,22 +43,38 @@ function StatusCard({ text }) {
 }
 
 export default function Swipe() {
-    // TODO: Change this to our view
     const [cards, setCards] = useState();
 
     // replace with real remote data fetching
     useEffect(() => {
-        setTimeout(() => {
-            setCards([
-                { text: "Tomato", backgroundColor: "red", images:["https://firebasestorage.googleapis.com/v0/b/winhacks-308216.appspot.com/o/assets%2Fdrake_1.jpg?alt=media"] },
-                { text: "Aubergine", backgroundColor: "purple", images:["https://firebasestorage.googleapis.com/v0/b/winhacks-308216.appspot.com/o/assets%2Fsample.jpg?alt=media"] },
-                { text: "Courgette", backgroundColor: "green" },
-                { text: "Blueberry", backgroundColor: "blue" },
-                { text: "Umm...", backgroundColor: "cyan" },
-                { text: "orange", backgroundColor: "orange" },
-            ]);
-        }, 3000);
-    }, []);
+        if(!cards) {
+            // TODO: Call backend for real data
+            setTimeout(() => {
+                setCards([
+                    {
+                        text: "Drake",
+                        description: "The kids crib. The one and only!",
+                        images: ["https://firebasestorage.googleapis.com/v0/b/winhacks-308216.appspot.com/o/assets%2Fdrake_1.jpg?alt=media"],
+                        lat: 40.44,
+                        lon: 23.55,
+                        size: 11000,
+                    },
+                    {
+                        text: "N/A",
+                        description: "Nothing here...",
+                        images: ["https://firebasestorage.googleapis.com/v0/b/winhacks-308216.appspot.com/o/assets%2Fsample.jpg?alt=media"],
+                        lat: 41.44,
+                        lon: 245.55,
+                        size: 1000,
+                    },
+                    {text: "Courgette"},
+                    {text: "Blueberry"},
+                    {text: "Umm..."},
+                    {text: "orange"},
+                ]);
+            }, 3000);
+        }
+    }, [cards]);
 
     if (!cards) return <Loading />
 
@@ -60,7 +89,7 @@ export default function Swipe() {
     }
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container]}>
             {cards ? (
                 <SwipeCards
                     cards={cards}
@@ -76,7 +105,7 @@ export default function Swipe() {
                     stackDepth={3}
                 />
             ) : (
-                <StatusCard text="Loading..." />
+                <Loading />
             )}
         </View>
     );
@@ -94,6 +123,19 @@ const styles = StyleSheet.create({
         alignItems: "center",
         width: Layout.width,
         height: Layout.height,
+        backgroundColor: Colors.primaryGray,
+        borderRadius: 10,
+        ...Platform.select({
+            ios: {
+                shadowColor: 'rgba(0,0,0, .7)',
+                shadowOffset: { height:0, width: 0 },
+                shadowOpacity: 0.2,
+                shadowRadius: 5,
+            },
+            android: {
+                elevation: 5
+            },
+        }),
     },
     cardsText: {
         fontSize: 22,
