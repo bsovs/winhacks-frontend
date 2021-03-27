@@ -29,10 +29,7 @@ const SignupScreen = () => {
 
                 if (authRes.user.email) {
                     console.log('succesful sign in')
-
                     navigation.navigate('Swipe')
-
-                    // All auth credentials should be found in authRes
                 }
                 else {
                     console.log('no email')
@@ -41,10 +38,10 @@ const SignupScreen = () => {
             catch (error) {
                 if (error.code == 'auth/weak-password') {
                     console.log('weak password')
-                    console.log(error.message)
+                    alert(error.message)
                 } else {
                     console.log('error')
-                    console.log(error.message)
+                    alert(error.message)
                 }
             }
         }

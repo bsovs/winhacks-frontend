@@ -68,7 +68,7 @@ const Layout = StyleSheet.create({
     textInput: {
         borderWidth: 1,
         marginVertical: 5,
-        padding: 5,
+        padding: 6,
         borderRadius: 5,
         width: width - 75,
         borderColor: Colors.grey
