@@ -10,6 +10,13 @@ const Layout = StyleSheet.create({
             android: {}
         })
     },
+    row: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        margin: 'auto'
+    },
     paddingSmall: {
         padding: 10,
     },
@@ -47,7 +54,7 @@ const Layout = StyleSheet.create({
     button: {
         marginRight: 10
     },
-    width: width - 20,
+    width: width,
     height: height,
 });
 export default Layout;

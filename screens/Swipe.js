@@ -3,36 +3,8 @@ import { StyleSheet, Text, View, Image } from "react-native";
 import SwipeCards from "react-native-swipe-cards-deck";
 import Loading from "../components/Loading";
 import Layout from "../styles/Layout";
-import {uid} from 'react-uid';
 import Colors from "../styles/Colors";
-import Bullet from "../components/Bullet";
-import {useHeaderHeight} from "@react-navigation/stack";
-
-function Card({ data }) {
-    const headerHeight = useHeaderHeight();
-    return (
-        <View style={[styles.card, {height: Layout.height - headerHeight}]}>
-            {
-                data.images && data.images.map(url =>
-                    <Image
-                        key={uid(url)}
-                        source={{uri: url}}
-                        style={{
-                            width: Layout.width,
-                            height: Layout.height/2,
-                            borderRadius: styles.card.borderRadius,
-                        }}
-                    />)
-            }
-            <Text style={Layout.textHeader}>{data.text}</Text>
-            <Text style={[Layout.textRow, {fontWeight: 'bold'}]}>About</Text>
-            <Text style={[Layout.textRow]}>{data.description || 'n/a'}</Text>
-            <Text style={[Layout.textRow, {fontWeight: 'bold'}]}>Features</Text>
-            <Bullet>lat-lon: ({data.lat}, {data.lon})</Bullet>
-            <Bullet>size: {data.size} sqr. m</Bullet>
-        </View>
-    );
-}
+import Card from "../components/Card";
 
 function StatusCard({ text }) {
     return (
@@ -90,7 +62,7 @@ export default function Swipe() {
 
     return (
         <View style={[styles.container]}>
-            {cards ? (
+            {cards && (
                 <SwipeCards
                     cards={cards}
                     renderCard={(cardData) => <Card data={cardData} />}
@@ -104,8 +76,6 @@ export default function Swipe() {
                     stack={true}
                     stackDepth={3}
                 />
-            ) : (
-                <Loading />
             )}
         </View>
     );
@@ -117,25 +87,6 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",
         alignItems: "center",
         justifyContent: "center",
-    },
-    card: {
-        justifyContent: "flex-start",
-        alignItems: "center",
-        width: Layout.width,
-        height: Layout.height,
-        backgroundColor: Colors.primaryGray,
-        borderRadius: 10,
-        ...Platform.select({
-            ios: {
-                shadowColor: 'rgba(0,0,0, .7)',
-                shadowOffset: { height:0, width: 0 },
-                shadowOpacity: 0.2,
-                shadowRadius: 5,
-            },
-            android: {
-                elevation: 5
-            },
-        }),
     },
     cardsText: {
         fontSize: 22,

@@ -6,14 +6,13 @@ import Layout from "../styles/Layout";
 export default function Loading() {
     return (
         <View style={styles.container}>
-            <ActivityIndicator size="large" color={Colors.primaryText} />
+            <ActivityIndicator size="large" color={Colors.white} />
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         backgroundColor: Colors.primaryBg,
         alignItems: 'center',
         justifyContent: 'center',
