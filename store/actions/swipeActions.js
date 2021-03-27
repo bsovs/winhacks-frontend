@@ -2,9 +2,10 @@ import axios from '../axios/axios-config';
 import  * as actionTypes from './actionTypes';
 
 export const onSwipe = ({id, rating}) => {
+    console.log(id, rating)
     return dispatch => {
         dispatch(swipeStart());
-        axios.post( '/homes/swipe',  {homeId: id, rating})
+        axios.post( '/profiles/swipe',  {homeId: id, rating})
             .then( response => {
                 console.log(response);
                 dispatch(swipeSuccess());
