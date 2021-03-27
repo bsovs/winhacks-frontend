@@ -23,11 +23,16 @@ function Card({ data }) {
                 setImageIndex(0)
             }
         }
-
     }
-
-    const handleLeftSideTap = () => {
-
+    const decrementImageIndex = () => {
+        if (data.images && data.images.length > 0) {
+            if (imageIndex > 0) {
+                setImageIndex(imageIndex + 1)
+            }
+            else if (imageIndex === 0) {
+                setImageIndex(data.images.length - 1)
+            }
+        }
     }
 
     const handleRightSideTap = () => {
@@ -35,34 +40,47 @@ function Card({ data }) {
         incrementImageIndex()
     }
 
+    const handleLeftSideTap = () => {
+        console.log('right side pressed')
+        decrementImageIndex()
+    }
+
     return (
         <View style={[styles.card, { height: Layout.height - headerHeight }]}>
             {
                 data.images && data.images.length > 0 &&
                 <View style={styles.tapContainer}>
-                    <TouchableWithoutFeedback style={styles.leftCard}
-                        onPress={() => console.log('testing')}
-                    >
-                        <Button title="Testing" color="blue" onPress={() => console.log('testing')} />
-                    </TouchableWithoutFeedback>
-                    <TouchableWithoutFeedback style={styles.rightCard}
-                        onPress={() => console.log('testing')}
-                    >
-                        <Button title="Testing" color="blue" onPress={() => console.log('testing')} />
-                    </TouchableWithoutFeedback>
+
+                    <View style={styles.leftSide}>
+                        <TouchableOpacity onPress={handleLeftSideTap}
+                            style={{ height: '100%' }}
+                        >
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.rightSide}>
+                        <TouchableOpacity onPress={handleRightSideTap}
+                            style={{ height: '100%' }}
+                        >
+                        </TouchableOpacity>
+                    </View>
                 </View>
 
             }
-            {/* <Image
-                key={uid(data.images[imageIndex])}
-                source={{ uri: data.images[imageIndex] }}
+            {
+                data.images && data.images.length > 0 &&
+                <Image
+                    key={uid(data.images[imageIndex])}
+                    source={{ uri: data.images[imageIndex] }}
 
-                style={{
-                    width: Layout.width,
-                    height: Layout.height / 2,
-                    borderRadius: styles.card.borderRadius,
-                }}
-            /> */}
+                    style={{
+                        zIndex: -1,
+                        position: 'absolute',
+                        width: Layout.width,
+                        height: Layout.height / 2,
+                        borderRadius: styles.card.borderRadius,
+                    }}
+                />
+            }
             <Text style={Layout.textHeader}>{data.text}</Text>
             <Text style={[Layout.textRow, { fontWeight: 'bold' }]}>About</Text>
             <Text style={[Layout.textRow]}>{data.description || 'n/a'}</Text>
@@ -204,13 +222,26 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
     },
     tapContainer: {
-        backgroundColor: 'pink',
         width: '100%',
         flexDirection: 'row',
-        justifyContent: 'space-around',
-        height: 450,
-        flexDirection: 'row',
-
+        height: Layout.height / 2,
+    },
+    leftSide: {
+        flex: 1,
+    },
+    rightSide: {
+        flex: 1,
     }
 
 });
+
+// <TouchableWithoutFeedback style={styles.leftCard}
+// onPress={() => console.log('testing')}
+// >
+// <Button title="Testing" color="blue" onPress={() => console.log('testing')} />
+// </TouchableWithoutFeedback>
+// <TouchableWithoutFeedback style={styles.rightCard}
+// onPress={() => console.log('testing')}
+// >
+// <Button title="Testing" color="blue" onPress={() => console.log('testing')} />
+// </TouchableWithoutFeedback>
