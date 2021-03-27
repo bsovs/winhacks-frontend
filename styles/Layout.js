@@ -1,4 +1,5 @@
 import { Dimensions, Platform, StyleSheet } from "react-native";
+import Colors from "./Colors";
 const { height, width } = Dimensions.get('window');
 
 const Layout = StyleSheet.create({
@@ -9,6 +10,13 @@ const Layout = StyleSheet.create({
             ios: {},
             android: {}
         })
+    },
+    row: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        margin: 'auto'
     },
     paddingSmall: {
         padding: 10,
@@ -26,6 +34,14 @@ const Layout = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         width: width / 1.5
+    },
+    title: {
+        fontWeight: 'bold',
+        fontSize: 28,
+        marginVertical: 10,
+        letterSpacing: 2,
+        color: Colors.secondaryText,
+        padding: 5,
     },
     textHeader: {
         fontWeight: '500',
@@ -47,7 +63,7 @@ const Layout = StyleSheet.create({
     button: {
         marginRight: 10
     },
-    width: width - 20,
+    width: width,
     height: height,
 });
 export default Layout;

@@ -1,96 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, Image, Button } from "react-native";
+import { connect } from 'react-redux';
+import { StyleSheet, Text, View } from "react-native";
 import SwipeCards from "react-native-swipe-cards-deck";
 import Loading from "../components/Loading";
-import Layout from "../styles/Layout";
-import { uid } from 'react-uid';
-import Colors from "../styles/Colors";
-import Bullet from "../components/Bullet";
-import { useHeaderHeight } from "@react-navigation/stack";
-import { TouchableOpacity, TouchableWithoutFeedback } from "react-native-gesture-handler";
-
-function Card({ data }) {
-    const headerHeight = useHeaderHeight();
-
-    const [imageIndex, setImageIndex] = useState(0)
-
-    const incrementImageIndex = () => {
-        if (data.images && data.images.length > 0) {
-            if (imageIndex < data.images.length - 1) {
-                setImageIndex(imageIndex + 1)
-            }
-            else if (imageIndex === data.images.length - 1) {
-                setImageIndex(0)
-            }
-        }
-    }
-    const decrementImageIndex = () => {
-        if (data.images && data.images.length > 0) {
-            if (imageIndex > 0) {
-                setImageIndex(imageIndex + 1)
-            }
-            else if (imageIndex === 0) {
-                setImageIndex(data.images.length - 1)
-            }
-        }
-    }
-
-    const handleRightSideTap = () => {
-        console.log('right side pressed')
-        incrementImageIndex()
-    }
-
-    const handleLeftSideTap = () => {
-        console.log('right side pressed')
-        decrementImageIndex()
-    }
-
-    return (
-        <View style={[styles.card, { height: Layout.height - headerHeight }]}>
-            {
-                data.images && data.images.length > 0 &&
-                <View style={styles.tapContainer}>
-
-                    <View style={styles.leftSide}>
-                        <TouchableOpacity onPress={handleLeftSideTap}
-                            style={{ height: '100%' }}
-                        >
-                        </TouchableOpacity>
-                    </View>
-                    <View style={styles.rightSide}>
-                        <TouchableOpacity onPress={handleRightSideTap}
-                            style={{ height: '100%' }}
-                        >
-                        </TouchableOpacity>
-                    </View>
-                </View>
-
-            }
-            {
-                data.images && data.images.length > 0 &&
-                <Image
-                    key={uid(data.images[imageIndex])}
-                    source={{ uri: data.images[imageIndex] }}
-
-                    style={{
-                        zIndex: -1,
-                        position: 'absolute',
-                        width: Layout.width,
-                        height: Layout.height / 2,
-                        borderRadius: styles.card.borderRadius,
-                    }}
-                />
-            }
-            <Text style={Layout.textHeader}>{data.text}</Text>
-            <Text style={[Layout.textRow, { fontWeight: 'bold' }]}>About</Text>
-            <Text style={[Layout.textRow]}>{data.description || 'n/a'}</Text>
-            <Text style={[Layout.textRow, { fontWeight: 'bold' }]}>Features</Text>
-            <Bullet>lat-lon: ({data.lat}, {data.lon})</Bullet>
-            <Bullet>size: {data.size} sqr. m</Bullet>
-            <Button title="Testing" onPress={() => console.log('testing')} />
-        </View>
-    );
-}
+import Card from "../components/Card";
+import {onSwipe} from "../store/actions/swipeActions";
 
 function StatusCard({ text }) {
     return (
@@ -100,7 +14,7 @@ function StatusCard({ text }) {
     );
 }
 
-export default function Swipe() {
+const Swipe = (props) => {
     const [cards, setCards] = useState();
 
     // replace with real remote data fetching
@@ -110,17 +24,17 @@ export default function Swipe() {
             setTimeout(() => {
                 setCards([
                     {
-                        text: "Drake",
-                        description: "The kids crib. The one and only!",
+                        text: "Drake's House. 21 Park Ln Cir",
+                        description: "Rapper, singer, songwriter, record producer, and actor, Drake, is building this 21,000 sqft Versailles-inspired estate in Toronto's exclusive Bridle Path neighborhood. The property will include a basketball court, gym, outdoor projection screen, both champagne and wine cellars, screening room, spa and massage areas, and a basement 'jersey museum' for his sports collectables.",
                         images: ["https://firebasestorage.googleapis.com/v0/b/winhacks-308216.appspot.com/o/assets%2Fdrake_1.jpg?alt=media",
                             'https://beta.ctvnews.ca/content/dam/cp24/images/2019/9/17/1_4596677.jpg',
                             'https://i.ytimg.com/vi/VUPduqWo7hI/maxresdefault.jpg',
                             'https://media.architecturaldigest.com/photos/5e8b3793ad4f6600086a9ff0/master/w_2550,h_2037,c_limit/AD0520_DRAKE_14.jpg'
                         ],
                         address: '21 Park Ln Cir',
-                        lat: 43.835180,
-                        lon: -79.439360,
-                        size: 11000,
+                        lat: 43.7341853,
+                        lon: -79.3748936,
+                        size: 21000,
                     },
                     {
                         text: "N/A",
@@ -151,18 +65,19 @@ export default function Swipe() {
     if (!cards) return <Loading />
 
     const handleYup = (card) => {
-        return true;
+        console.log(card);
+        props.onSwipe(card.id, 1.0);
     }
     const handleNope = (card) => {
-        return true;
+        props.onSwipe(card.id, 0.0);
     }
     const handleMaybe = (card) => {
-        return true;
+        props.onSwipe(card.id, 0.5);
     }
 
     return (
         <View style={[styles.container]}>
-            {cards ? (
+            {cards && (
                 <SwipeCards
                     cards={cards}
                     renderCard={(cardData) => <Card data={cardData} />}
@@ -176,8 +91,6 @@ export default function Swipe() {
                     stack={true}
                     stackDepth={3}
                 />
-            ) : (
-                <Loading />
             )}
         </View>
     );
@@ -190,50 +103,25 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
     },
-    card: {
-        justifyContent: "flex-start",
-        alignItems: "center",
-        width: Layout.width,
-        height: Layout.height,
-        backgroundColor: Colors.primaryGray,
-        borderRadius: 10,
-        ...Platform.select({
-            ios: {
-                shadowColor: 'rgba(0,0,0, .7)',
-                shadowOffset: { height: 0, width: 0 },
-                shadowOpacity: 0.2,
-                shadowRadius: 5,
-            },
-            android: {
-                elevation: 5
-            },
-        }),
-    },
     cardsText: {
         fontSize: 22,
     },
-    leftCard: {
-        flex: 10,
-        backgroundColor: 'red'
-    },
-    rightCard: {
-        flex: 10,
-        backgroundColor: 'blue',
-        alignSelf: 'stretch',
-    },
-    tapContainer: {
-        width: '100%',
-        flexDirection: 'row',
-        height: Layout.height / 2,
-    },
-    leftSide: {
-        flex: 1,
-    },
-    rightSide: {
-        flex: 1,
-    }
-
 });
+
+const mapStateToProps = state => {
+    return {
+        loading: state.swipe.loading,
+        error: state.swipe.error,
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onSwipe: ( id, rating ) => dispatch( onSwipe({id, rating}) ),
+    };
+};
+
+export default connect( mapStateToProps, mapDispatchToProps )( Swipe );
 
 // <TouchableWithoutFeedback style={styles.leftCard}
 // onPress={() => console.log('testing')}
