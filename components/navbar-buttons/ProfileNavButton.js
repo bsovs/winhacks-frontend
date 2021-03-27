@@ -9,11 +9,12 @@ const CustomHeaderButton = props => {
             {...props}
             IconComponent={Ionicons}
             iconSize={28}
+            color='red'
         />
     )
 }
 
-const AddFriendButton = ({ navigationData }) => {
+const ProfileNavButton = ({ navigationData }) => {
 
     const handleButtonPress = () => {
         console.log('adding friend');
@@ -30,4 +31,4 @@ const AddFriendButton = ({ navigationData }) => {
     )
 }
 
-export default AddFriendButton
+export default ProfileNavButton

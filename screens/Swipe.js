@@ -121,4 +121,10 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
+Swipe.navigationOptions = navigationData => {
+    return {
+        headerRight: () => <ProfileNavButton navigationData={navigationData} />,
+    }
+}
+
 export default connect(mapStateToProps, mapDispatchToProps)(Swipe);

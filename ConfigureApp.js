@@ -10,36 +10,37 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Button } from 'react-native';
 import Colors from "./styles/Colors";
 import Layout from "./styles/Layout";
+import ProfileNavButton from './components/navbar-buttons/ProfileNavButton'
 
 const Stack = createStackNavigator();
 
 const Tab = createBottomTabNavigator();
 
 const NavButtons = ({ navigation }) => {
-    return (<View style={[Layout.row, {width: Layout.width}]}>
-        <View/>
+    return (<View style={[Layout.row, { width: Layout.width }]}>
+        <View />
         <Icon
             onPress={() => navigation.navigate('Home')}
             name="home"
             size={30}
             color={Colors.black}
-            style={{margin: 'auto'}}
+            style={{ margin: 'auto' }}
         />
         <Icon
             onPress={() => navigation.navigate('Refresh')}
             name="user"
             size={28}
             color={Colors.black}
-            style={{margin: 'auto'}}
+            style={{ margin: 'auto' }}
         />
         <Icon
             onPress={() => navigation.navigate('Refresh')}
             name="gear"
             size={28}
             color={Colors.black}
-            style={{margin: 'auto'}}
+            style={{ margin: 'auto' }}
         />
-        <View/>
+        <View />
     </View>);
 }
 
@@ -48,16 +49,17 @@ function ConfiguredApp() {
         <NavigationContainer>
             <Stack.Navigator>
                 <Stack.Screen name="Home" component={Swipe}
-                              options={({ navigation }) => ({
-                                  headerTitle: props => <NavButtons navigation={navigation} {...props} />,
-                                  headerLeft: null,
-                              })}
+                    options={({ navigation }) => ({
+                        headerTitle: 'Logo Here',
+                        headerLeft: null,
+                    })}
                 />
                 <Stack.Screen name="Refresh" component={Swipe}
-                              options={({ navigation }) => ({
-                                  headerTitle: props => <NavButtons navigation={navigation} {...props} />,
-                                  headerLeft: null,
-                              })}
+                    options={({ navigation }) => ({
+                        headerTitle: '',
+                        headerLeft: null,
+                        headerRight: () => <ProfileNavButton navigationData={navigation} />,
+                    })}
                 />
             </Stack.Navigator>
         </NavigationContainer>
