@@ -21,7 +21,7 @@ const LoginScreen = () => {
                 if (authRes.user.email) {
                     console.log('succesful sign in')
                     axios.post('/profiles/new')
-                        .finally(error => {
+                        .finally(() => {
                             navigation.navigate('Swipe');
                         });
                 }

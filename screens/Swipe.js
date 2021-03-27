@@ -39,6 +39,7 @@ const Swipe = (props) => {
             const location = await Location.getCurrentPositionAsync({});
             axios.post('/homes/fetch', {lat: location.coords.latitude, lon: location.coords.longitude})
                 .then(response => {
+                    console.log(response.data)
                     setCards(response.data);
                 })
                 .catch(error => {
@@ -57,7 +58,7 @@ const Swipe = (props) => {
         })();
     }, [props.location]);
 
-    if (props.error) return (
+    if (!cards && props.error) return (
         <View style={[styles.container]}>
             <Text>{props.error.toString()}</Text>
             <Button onPress={() => getCards()} title="Refresh"/>
