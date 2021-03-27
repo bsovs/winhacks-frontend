@@ -235,13 +235,3 @@ const styles = StyleSheet.create({
 
 });
 
-// <TouchableWithoutFeedback style={styles.leftCard}
-// onPress={() => console.log('testing')}
-// >
-// <Button title="Testing" color="blue" onPress={() => console.log('testing')} />
-// </TouchableWithoutFeedback>
-// <TouchableWithoutFeedback style={styles.rightCard}
-// onPress={() => console.log('testing')}
-// >
-// <Button title="Testing" color="blue" onPress={() => console.log('testing')} />
-// </TouchableWithoutFeedback>
