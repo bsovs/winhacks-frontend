@@ -24,6 +24,7 @@ const Swipe = (props) => {
             setTimeout(() => {
                 setCards([
                     {
+                        id: "198d84d6-7af8-4610-95d0-68fd9d8c6a16",
                         text: "Drake's House. 21 Park Ln Cir",
                         description: "Rapper, singer, songwriter, record producer, and actor, Drake, is building this 21,000 sqft Versailles-inspired estate in Toronto's exclusive Bridle Path neighborhood. The property will include a basketball court, gym, outdoor projection screen, both champagne and wine cellars, screening room, spa and massage areas, and a basement 'jersey museum' for his sports collectables.",
                         images: ["https://firebasestorage.googleapis.com/v0/b/winhacks-308216.appspot.com/o/assets%2Fdrake_1.jpg?alt=media",
@@ -37,6 +38,7 @@ const Swipe = (props) => {
                         size: 21000,
                     },
                     {
+                        id: '7ca98e65-b34f-4a22-ad06-e1266e2c0f01',
                         text: "N/A",
                         description: "Nothing here...",
                         images:
@@ -53,10 +55,22 @@ const Swipe = (props) => {
                         lon: 245.55,
                         size: 1000,
                     },
-                    { text: "Courgette" },
-                    { text: "Blueberry" },
-                    { text: "Umm..." },
-                    { text: "orange" },
+                    {
+                        id: '70e8ddc3-258b-47b2-b0d5-22433fda1368',
+                        text: "Courgette"
+                    },
+                    {
+                        id: '70d4428d-c5ec-49d6-a59e-f72513d57482',
+                        text: "Blueberry"
+                    },
+                    {
+                        id: 'c13e0547-4512-4e5d-a474-a6fcdc813d35',
+                        text: "Umm..."
+                    },
+                    {
+                        id: '02d44f17-7962-4bfd-933c-7e606df69283',
+                        text: "orange"
+                    },
                 ]);
             }, 3000);
         }
@@ -67,12 +81,15 @@ const Swipe = (props) => {
     const handleYup = (card) => {
         console.log(card);
         props.onSwipe(card.id, 1.0);
+        return true;
     }
     const handleNope = (card) => {
         props.onSwipe(card.id, 0.0);
+        return true;
     }
     const handleMaybe = (card) => {
         props.onSwipe(card.id, 0.5);
+        return true;
     }
 
     return (
