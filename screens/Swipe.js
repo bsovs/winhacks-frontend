@@ -6,6 +6,10 @@ import Loading from "../components/Loading";
 import Card from "../components/Card";
 import { onSwipe } from "../store/actions/swipeActions";
 import ProfileNavButton from '../components/navbar-buttons/ProfileNavButton'
+import { useNavigation } from "@react-navigation/core";
+import firebase from '../firebase.config'
+
+const auth = firebase.auth()
 
 function StatusCard({ text }) {
     return (
@@ -16,6 +20,15 @@ function StatusCard({ text }) {
 }
 
 const Swipe = (props) => {
+
+    const navigation = useNavigation()
+
+    useEffect(() => {
+        if (!auth.currentUser.email) {
+            navigation.push('Landing')
+        }
+    }, [])
+
     const [cards, setCards] = useState();
 
     // replace with real remote data fetching
