@@ -66,11 +66,17 @@ export default function Card({ data }) {
                 <SafeAreaView style={{ height: Layout.height / 2 - headerHeight }}>
                     <ScrollView>
                         <Text style={Layout.textHeader}>{data.title}</Text>
+                        <Text style={Layout.textHeader}>Price: ${data.price}</Text>
+
                         <Text style={[Layout.textRow, { fontWeight: 'bold' }]}>About</Text>
                         <Text style={[Layout.textRow]}>{data.description || 'n/a'}</Text>
                         <Text style={[Layout.textRow, { fontWeight: 'bold' }]}>Features</Text>
+                        <Bullet>size: {data.surface_total_in_m2} sqr. m</Bullet>
+                        <Bullet>rooms: {data.rooms}</Bullet>
+                        <Bullet>location: {data.state_name}, {data.country_name}</Bullet>
                         <Bullet>lat-lon: ({data.lat}, {data.lon})</Bullet>
-                        <Bullet>size: {data.size} sqr. m</Bullet>
+                        <Bullet>type: {data.property_type}</Bullet>
+                        <Bullet>listed on: {Date(data.created_on)}</Bullet>
                     </ScrollView>
                 </SafeAreaView>
             )
