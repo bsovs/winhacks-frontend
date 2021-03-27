@@ -17,7 +17,7 @@ export default function Swipe() {
 
     // replace with real remote data fetching
     useEffect(() => {
-        if(!cards) {
+        if (!cards) {
             // TODO: Call backend for real data
             setTimeout(() => {
                 setCards([
@@ -37,10 +37,10 @@ export default function Swipe() {
                         lon: 245.55,
                         size: 1000,
                     },
-                    {text: "Courgette"},
-                    {text: "Blueberry"},
-                    {text: "Umm..."},
-                    {text: "orange"},
+                    { text: "Courgette" },
+                    { text: "Blueberry" },
+                    { text: "Umm..." },
+                    { text: "orange" },
                 ]);
             }, 3000);
         }
