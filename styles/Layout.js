@@ -37,10 +37,11 @@ const Layout = StyleSheet.create({
     },
     title: {
         fontWeight: 'bold',
-        fontSize: 30,
+        fontSize: 28,
         marginVertical: 10,
         letterSpacing: 2,
-        color: Colors.primaryText
+        color: Colors.secondaryText,
+        padding: 5,
     },
     textHeader: {
         fontWeight: '500',

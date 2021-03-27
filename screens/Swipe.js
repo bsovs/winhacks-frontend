@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { connect } from 'react-redux';
 import { StyleSheet, Text, View } from "react-native";
 import SwipeCards from "react-native-swipe-cards-deck";
 import Loading from "../components/Loading";
 import Card from "../components/Card";
+import {onSwipe} from "../store/actions/swipeActions";
 
 function StatusCard({ text }) {
     return (
@@ -12,7 +14,7 @@ function StatusCard({ text }) {
     );
 }
 
-export default function Swipe() {
+const Swipe = (props) => {
     const [cards, setCards] = useState();
 
     // replace with real remote data fetching
@@ -63,13 +65,14 @@ export default function Swipe() {
     if (!cards) return <Loading />
 
     const handleYup = (card) => {
-        return true;
+        console.log(card);
+        props.onSwipe(card.id, 1.0);
     }
     const handleNope = (card) => {
-        return true;
+        props.onSwipe(card.id, 0.0);
     }
     const handleMaybe = (card) => {
-        return true;
+        props.onSwipe(card.id, 0.5);
     }
 
     return (
@@ -100,50 +103,25 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
     },
-    card: {
-        justifyContent: "flex-start",
-        alignItems: "center",
-        width: Layout.width,
-        height: Layout.height,
-        backgroundColor: Colors.primaryGray,
-        borderRadius: 10,
-        ...Platform.select({
-            ios: {
-                shadowColor: 'rgba(0,0,0, .7)',
-                shadowOffset: { height: 0, width: 0 },
-                shadowOpacity: 0.2,
-                shadowRadius: 5,
-            },
-            android: {
-                elevation: 5
-            },
-        }),
-    },
     cardsText: {
         fontSize: 22,
     },
-    leftCard: {
-        flex: 10,
-        backgroundColor: 'red'
-    },
-    rightCard: {
-        flex: 10,
-        backgroundColor: 'blue',
-        alignSelf: 'stretch',
-    },
-    tapContainer: {
-        width: '100%',
-        flexDirection: 'row',
-        height: Layout.height / 2,
-    },
-    leftSide: {
-        flex: 1,
-    },
-    rightSide: {
-        flex: 1,
-    }
-
 });
+
+const mapStateToProps = state => {
+    return {
+        loading: state.swipe.loading,
+        error: state.swipe.error,
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onSwipe: ( id, rating ) => dispatch( onSwipe({id, rating}) ),
+    };
+};
+
+export default connect( mapStateToProps, mapDispatchToProps )( Swipe );
 
 // <TouchableWithoutFeedback style={styles.leftCard}
 // onPress={() => console.log('testing')}
