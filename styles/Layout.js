@@ -43,8 +43,7 @@ const Layout = StyleSheet.create({
     button: {
         marginRight: 10
     },
-    width: {
-        width
-    }
+    width: width,
+    height: height,
 });
 export default Layout;
