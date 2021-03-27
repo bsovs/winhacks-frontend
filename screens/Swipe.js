@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 import SwipeCards from "react-native-swipe-cards-deck";
 import Loading from "../components/Loading";
 import Card from "../components/Card";
-import {onSwipe} from "../store/actions/swipeActions";
+import { onSwipe } from "../store/actions/swipeActions";
 
 function StatusCard({ text }) {
     return (
@@ -134,19 +134,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onSwipe: ( id, rating ) => dispatch( onSwipe({id, rating}) ),
+        onSwipe: (id, rating) => dispatch(onSwipe({ id, rating })),
     };
 };
 
-export default connect( mapStateToProps, mapDispatchToProps )( Swipe );
-
-// <TouchableWithoutFeedback style={styles.leftCard}
-// onPress={() => console.log('testing')}
-// >
-// <Button title="Testing" color="blue" onPress={() => console.log('testing')} />
-// </TouchableWithoutFeedback>
-// <TouchableWithoutFeedback style={styles.rightCard}
-// onPress={() => console.log('testing')}
-// >
-// <Button title="Testing" color="blue" onPress={() => console.log('testing')} />
-// </TouchableWithoutFeedback>
+export default connect(mapStateToProps, mapDispatchToProps)(Swipe);
