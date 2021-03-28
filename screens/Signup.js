@@ -70,7 +70,8 @@ const SignupScreen = () => {
                     height={75}
                     width={75}
                     style={{ height: 75, width: 75 }}
-                    source={require('../assets/house_icon_inverse.png')} />
+                    source={require('../assets/house_icon_inverse.png')}
+                />
             </View>
             <View style={{ height: 10 }} />
             <KeyboardAvoidingView>
