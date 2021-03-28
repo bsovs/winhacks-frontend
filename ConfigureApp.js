@@ -13,6 +13,7 @@ import {connect} from "react-redux";
 import Loading from "./components/Loading";
 import ProfileNavButton from './components/navbar-buttons/ProfileNavButton'
 import MessagesNavButton from './components/navbar-buttons/MessagesNavButton'
+import ChatWindow from "./screens/ChatWindow";
 
 const Stack = createStackNavigator();
 
@@ -55,6 +56,11 @@ const ConfiguredApp = (props) => {
             <Stack.Screen
                 name="Messages"
                 component={Message}
+
+            />
+            <Stack.Screen
+                name="Chat"
+                component={ChatWindow}
 
             />
             <Stack.Screen
