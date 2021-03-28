@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Swipe from './screens/Swipe'
 import Message from './screens/Message'
@@ -8,12 +8,13 @@ import Login from './screens/Login'
 import Signup from './screens/Signup'
 import Landing from './screens/Landing'
 import { createStackNavigator } from '@react-navigation/stack';
-import {getLocation} from "./store/actions/locationActions";
-import {connect} from "react-redux";
+import { getLocation } from "./store/actions/locationActions";
+import { connect } from "react-redux";
 import Loading from "./components/Loading";
 import ProfileNavButton from './components/navbar-buttons/ProfileNavButton'
 import MessagesNavButton from './components/navbar-buttons/MessagesNavButton'
 import ChatWindow from "./screens/ChatWindow";
+import { Image } from 'react-native';
 
 const Stack = createStackNavigator();
 
@@ -41,7 +42,12 @@ const ConfiguredApp = (props) => {
             />
             <Stack.Screen name="Swipe" component={Swipe}
                 options={(navigationData) => ({
-                    headerTitle: 'Logo here',
+                    headerTitle: <Image
+                        height={20}
+                        width={20}
+                        style={{ height: 75, width: 75 }}
+                        source={require('./assets/')}
+                    />,
                     headerLeft: () => <ProfileNavButton navigationData={navigationData} />,
                     headerRight: () => <MessagesNavButton navigationData={navigationData} />,
                 })}
