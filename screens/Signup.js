@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/core";
 import React, { useEffect, useState } from "react";
-import { Button, KeyboardAvoidingView, StyleSheet, Text, TextInput, View } from "react-native";
+import { Button, Image, KeyboardAvoidingView, StyleSheet, Text, TextInput, View } from "react-native";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import firebase from '../firebase.config'
 import Colors from "../styles/Colors";
@@ -65,8 +65,14 @@ const SignupScreen = () => {
 
     return (
         <View style={styles.screen}>
-            <Text style={Layout.headerText}>Sign Up</Text>
-
+            <View>
+                <Image
+                    height={75}
+                    width={75}
+                    style={{ height: 75, width: 75 }}
+                    source={require('../assets/house_icon_inverse.png')} />
+            </View>
+            <View style={{ height: 10 }} />
             <KeyboardAvoidingView>
                 <TextInput
                     autoCapitalize='none'
@@ -89,7 +95,7 @@ const SignupScreen = () => {
                     <Button title='Sign Up' color={Colors.red} onPress={signInWithEmail} />
                 </View>
             </KeyboardAvoidingView>
-            <View style={{ height: 80 }} />
+            <View style={{ height: 100 }}></View>
         </View>
     );
 }
