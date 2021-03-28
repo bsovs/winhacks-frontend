@@ -10,15 +10,22 @@ import {useNavigation} from "@react-navigation/core";
 import firebase from '../firebase.config'
 import axios from "../store/axios/axios-config";
 import * as Location from "expo-location";
-import {locationFailure, locationSuccess} from "../store/actions/locationActions";
+import { FontAwesome } from "react-native-vector-icons";
+import Layout from "../styles/Layout";
 
 const auth = firebase.auth();
 
 function NoMoreCard({text, refresh}) {
     return (
-        <View>
+        <View style={[Layout.container, {alignItems: 'center'}]}>
             <Text style={styles.cardsText}>{text}</Text>
-            <Button onPress={refresh} title="Refresh"/>
+            <FontAwesome
+                name="refresh"
+                style={Layout.margin}
+                size={50}
+                color="black"
+                onPress={refresh}
+                title="Refresh" />
         </View>
     );
 }
@@ -86,7 +93,7 @@ const Swipe = (props) => {
                 cards={cards}
                 renderCard={(cardData) => <Card data={cardData}/>}
                 keyExtractor={(cardData) => String(cardData.id)}
-                renderNoMoreCards={() => <NoMoreCard text="No more cards..." refresh={getCards}/>}
+                renderNoMoreCards={() => <NoMoreCard text="No more homes..." refresh={getCards}/>}
                 handleYup={handleYup}
                 handleNope={handleNope}
                 handleMaybe={handleMaybe}
