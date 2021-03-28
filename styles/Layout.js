@@ -65,13 +65,31 @@ const Layout = StyleSheet.create({
     },
     width: width,
     height: height,
+    headerText: {
+        fontSize: 25,
+        fontWeight: "500",
+        textAlign: 'left',
+        color: Colors.white,
+        marginVertical: 10,
+    },
     textInput: {
         borderWidth: 1,
-        marginVertical: 5,
+        marginVertical: 8,
         padding: 6,
         borderRadius: 5,
         width: width - 75,
-        borderColor: Colors.grey
-    }
+        borderColor: Colors.grey,
+        backgroundColor: Colors.white,
+        fontSize: 18
+    },
+    landingButton: {
+        width: width - 75,
+        backgroundColor: Colors.white,
+        color: Colors.red,
+        borderRadius: 8,
+        //height: 25,
+        fontSize: 18,
+        fontWeight: "600",
+    },
 });
 export default Layout;
