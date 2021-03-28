@@ -6,6 +6,7 @@ import { useHeaderHeight } from "@react-navigation/stack";
 import Layout from "../styles/Layout";
 import Colors from "../styles/Colors";
 import Icon from "react-native-vector-icons/FontAwesome";
+import {AntDesign, Entypo} from "react-native-vector-icons";
 
 export default function Card({ data }) {
     const headerHeight = useHeaderHeight();
@@ -50,35 +51,42 @@ export default function Card({ data }) {
     return (
         <View style={[styles.card, { height: Layout.height - headerHeight }]}>
             {
-                data.images && data.images.length > 0 &&
+                !showMore && data.images && data.images.length > 0 &&
                 <Image
                     key={uid(data.images[imageIndex])}
                     source={{ uri: data.images[imageIndex] }}
 
                     style={{
                         width: Layout.width,
-                        height: (showMore ? Layout.height / 2 : Layout.height - headerHeight),
+                        height: Layout.height / 2,
                         borderRadius: styles.card.borderRadius,
                     }}
                 />
             }
-            {showMore ? (
-                <SafeAreaView style={{ height: Layout.height / 2 - headerHeight }}>
+                <SafeAreaView style={{ height: Layout.height / (showMore ? 1 : 2) - headerHeight }}>
                     <ScrollView>
-                        <Text style={Layout.textHeader}>{data.text}</Text>
-                        <Text style={[Layout.textRow, { fontWeight: 'bold' }]}>About</Text>
-                        <Text style={[Layout.textRow]}>{data.description || 'n/a'}</Text>
+                        <Text style={[Layout.title, Layout.textHeader, {paddingLeft: 0}]}>{data.title}</Text>
+                        <Text style={Layout.textHeader}>Price: ${data.price}</Text>
+
                         <Text style={[Layout.textRow, { fontWeight: 'bold' }]}>Features</Text>
+                        <Bullet>size: {data.surface_total_in_m2} sqr. m</Bullet>
+                        <Bullet>rooms: {data.rooms}</Bullet>
+                        <Bullet>location: {data.state_name}, {data.country_name}</Bullet>
                         <Bullet>lat-lon: ({data.lat}, {data.lon})</Bullet>
-                        <Bullet>size: {data.size} sqr. m</Bullet>
+                        <Bullet>type: {data.property_type}</Bullet>
+                        <Bullet>listed on: {Date(data.created_on)}</Bullet>
+
+                        {
+                            showMore && (<>
+                                <Text style={[Layout.textRow, Layout.textHeader, { fontWeight: 'bold' }]}>About</Text>
+                                <Text style={[Layout.textRow]}>{data.description || 'n/a'}</Text>
+                            </>)
+                        }
                     </ScrollView>
                 </SafeAreaView>
-            )
-                : (<Text style={[Layout.title, { position: 'absolute', left: 10 }]}>{data.text}</Text>)
-            }
             {
-                data.images && data.images.length > 0 &&
-                <View style={[styles.tapContainer, { height: (showMore ? Layout.height / 2 : Layout.height - headerHeight) }]}>
+                !showMore && data.images && data.images.length > 0 &&
+                <View style={[styles.tapContainer, { height: Layout.height / 2  }]}>
                     <View style={styles.leftSide}>
                         <TouchableOpacity onPress={handleLeftSideTap}
                             style={{ height: '100%' }}
@@ -95,14 +103,18 @@ export default function Card({ data }) {
             }
             <View style={[Layout.padding, Layout.row, { position: 'absolute', left: 0, right: 0, bottom: 0 }]}>
                 <View />
-                <Icon
-                    onPress={toggleDetails}
-                    name={showMore ? "arrow-up" : "arrow-down"}
-                    size={40}
-                    color={Colors.primaryBg}
-                    title={'Details'}
-                    accessibilityLabel="Get more property details"
-                />
+                {!showMore ? (
+                        <Entypo name="info-with-circle" size={40}
+                                onPress={toggleDetails}
+                                color={Colors.primaryBg}
+                                accessibilityLabel="Get more property details"
+                        />)
+                    : (
+                        <AntDesign name="closecircleo" size={40}
+                                   onPress={toggleDetails}
+                                   color={Colors.primaryBg}/>
+                    )
+                }
                 <View />
             </View>
         </View>

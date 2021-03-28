@@ -1,4 +1,4 @@
-import { SET_PROFILE } from "../actions/profileActions"
+import { SET_PROFILE } from "../actions/actionTypes"
 
 const profileDefaultState = {
     firstName: '',

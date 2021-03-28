@@ -5,6 +5,7 @@ import Layout from "../styles/Layout";
 import Colors from "../styles/Colors";
 import firebase from '../firebase.config'
 import { useNavigation } from "@react-navigation/core";
+import axios from "../store/axios/axios-config";
 
 const LoginScreen = () => {
 
@@ -20,7 +21,11 @@ const LoginScreen = () => {
                 const authRes = await firebase.auth().signInWithEmailAndPassword(email, password)
                 if (authRes.user.email) {
                     console.log('succesful sign in')
-                    navigation.navigate('Swipe')
+                    axios.post('/profiles/new')
+                        .catch(_ => null)
+                        .finally(() => {
+                            navigation.navigate('Swipe');
+                        });
                 }
                 else {
                     console.log('problem logging in')

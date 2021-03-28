@@ -1,13 +1,15 @@
 import axios from 'axios';
 import { dev } from '../../config';
-import { AsyncStorage } from 'react-native';
+import firebase from '../../firebase.config'
+
+const auth = firebase.auth();
 
 const url = dev ? 'http://localhost:8080': 'https://winhacks-service.herokuapp.com';
 
 axios.defaults.baseURL = url+'/api';
 
 axios.interceptors.request.use(async function (config) {
-    const token = await AsyncStorage.getItem('token');
+    const token = await auth.currentUser.getIdToken();
     config.headers.Authorization =  config.headers.Authorization || (token ? `Bearer ${token}` : 'Bearer ');
     return config;
 }, function (error) {
