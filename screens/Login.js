@@ -1,7 +1,8 @@
 import { auth } from "firebase";
 import React, { useState } from "react";
-import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import { Button, Image, StyleSheet, Text, TextInput, View } from "react-native";
 import Layout from "../styles/Layout";
+import Colors from "../styles/Colors";
 import firebase from '../firebase.config'
 import { useNavigation } from "@react-navigation/core";
 
@@ -39,7 +40,14 @@ const LoginScreen = () => {
 
     return (
         <View style={styles.screen}>
-            <Text>Login Screen</Text>
+            <View>
+                <Image
+                    height={75}
+                    width={75}
+                    style={{ height: 75, width: 75 }}
+                    source={require('../assets/house_icon_inverse.png')} />
+            </View>
+            <View style={{ height: 10 }} />
             <TextInput
                 autoCapitalize='none'
                 style={Layout.textInput}
@@ -53,14 +61,18 @@ const LoginScreen = () => {
                 autoCapitalize='none'
                 onChangeText={(text) => setPassword(text)}
             />
-            <Button title='Login' onPress={handleLoginPressed} />
-            <View style={{ height: 60 }}></View>
+            <View style={{ height: 10 }} />
+            <View style={Layout.landingButton}>
+                <Button title='Login' color={Colors.red} onPress={handleLoginPressed} />
+            </View>
+            <View style={{ height: 100 }}></View>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     screen: {
+        backgroundColor: Colors.red,
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',

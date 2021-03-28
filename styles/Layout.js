@@ -73,14 +73,14 @@ const Layout = StyleSheet.create({
         marginVertical: 10,
     },
     textInput: {
-        borderWidth: 1,
+        borderWidth: 0,
         marginVertical: 8,
-        padding: 6,
+        padding: 8,
         borderRadius: 5,
         width: width - 75,
         borderColor: Colors.grey,
         backgroundColor: Colors.white,
-        fontSize: 18
+        fontSize: 14
     },
     landingButton: {
         width: width - 75,
