@@ -1,6 +1,7 @@
 const Colors = {
     white: '#fff',
     black: '#000',
+    red: '#dc3c3f',
     primaryBg: 'rgba(245,48,70,0.78)',
     secondaryBg: '#bd2000',
     primaryText: '#fc273d',

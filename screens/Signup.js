@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Button, KeyboardAvoidingView, StyleSheet, Text, TextInput, View } from "react-native";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import firebase from '../firebase.config'
+import Colors from "../styles/Colors";
 import Layout from "../styles/Layout";
 
 const auth = firebase.auth()
@@ -46,6 +47,7 @@ const SignupScreen = () => {
             }
         }
         else {
+            alert('Please enter both email and password')
             console.log('no email/password')
         }
     }
@@ -56,7 +58,8 @@ const SignupScreen = () => {
 
     return (
         <View style={styles.screen}>
-            <Text>Sign Up</Text>
+            <Text style={Layout.headerText}>Sign Up</Text>
+
             <KeyboardAvoidingView>
                 <TextInput
                     autoCapitalize='none'
@@ -74,14 +77,19 @@ const SignupScreen = () => {
                     placeholder='confirm password'
                     secureTextEntry={true}
                 />
-                <Button title='Sign Up' onPress={signInWithEmail} />
+                <View style={{ height: 10 }} />
+                <View style={Layout.landingButton}>
+                    <Button title='Sign Up' color={Colors.red} onPress={signInWithEmail} />
+                </View>
             </KeyboardAvoidingView>
+            <View style={{ height: 80 }} />
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     screen: {
+        backgroundColor: Colors.red,
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
