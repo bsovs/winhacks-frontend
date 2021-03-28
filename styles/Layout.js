@@ -91,5 +91,14 @@ const Layout = StyleSheet.create({
         fontSize: 18,
         fontWeight: "600",
     },
+    inverseButton: {
+        width: width - 75,
+        backgroundColor: Colors.red,
+        color: Colors.white,
+        borderRadius: 8,
+        //height: 25,
+        fontSize: 18,
+        fontWeight: "600",
+    },
 });
 export default Layout;
