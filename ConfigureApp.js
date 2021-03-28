@@ -8,19 +8,20 @@ import Login from './screens/Login'
 import Signup from './screens/Signup'
 import Landing from './screens/Landing'
 import { createStackNavigator } from '@react-navigation/stack';
-import { getLocation } from "./store/actions/locationActions";
-import { connect } from "react-redux";
-import Loading from "./components/Loading";
 import ProfileNavButton from './components/navbar-buttons/ProfileNavButton'
 import MessagesNavButton from './components/navbar-buttons/MessagesNavButton'
 import { Image } from 'react-native';
+import Colors from './styles/Colors'
 
 const Stack = createStackNavigator();
 
 const Tab = createBottomTabNavigator();
 
+const { Screen } = Stack
 
 const ConfiguredApp = (props) => {
+
+    const iconDimension = 36
 
     return (
         <Stack.Navigator>
@@ -42,10 +43,10 @@ const ConfiguredApp = (props) => {
             <Stack.Screen name="Swipe" component={Swipe}
                 options={(navigationData) => ({
                     headerTitle: <Image
-                        height={20}
-                        width={20}
-                        style={{ height: 75, width: 75 }}
-                        source={require('./assets/')}
+                        height={iconDimension}
+                        width={iconDimension}
+                        style={{ height: iconDimension, width: iconDimension }}
+                        source={require('./assets/house_icon_red.png')}
                     />,
                     headerLeft: () => <ProfileNavButton navigationData={navigationData} />,
                     headerRight: () => <MessagesNavButton navigationData={navigationData} />,
@@ -53,15 +54,25 @@ const ConfiguredApp = (props) => {
             />
             <Stack.Screen name="Refresh" component={Swipe}
                 options={({ navigation }) => ({
-                    headerTitle: '',
+                    headerTitle: <Image
+                        height={iconDimension}
+                        width={iconDimension}
+                        style={{ height: iconDimension, width: iconDimension }}
+                        source={require('./assets/house_icon_red.png')}
+                    />,
                     headerLeft: null,
                     headerRight: () => <ProfileNavButton navigationData={navigation} />,
                 })}
             />
-            <Stack.Screen
+            <Screen
                 name="Messages"
                 component={Message}
-
+                options={{
+                    headerTintColor: Colors.red,
+                    headerTitleStyle: {
+                        color: 'black'
+                    }
+                }}
             />
             <Stack.Screen
                 name="Profile"
